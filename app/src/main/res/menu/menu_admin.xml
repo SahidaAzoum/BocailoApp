@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group
+        android:checkableBehavior="single">
+
+
+        <item
+            android:id="@+id/InicioAdmin"
+            android:title="@string/InicioAdmin"
+            android:icon="@drawable/inicio_ico"/>
+
+        <item
+            android:id="@+id/OpcionesAdmin"
+            android:title="@string/opciones_administrador">
+
+            <menu>
+                <item
+                    android:id="@+id/PerfilAdmin"
+                    android:title="@string/PerfilAdmin"
+                    android:icon="@drawable/perfiladmin_ico"/>
+                <item
+                    android:id="@+id/RegistrarAdmin"
+                    android:title="@string/RegistrarAdmin"
+                    android:icon="@drawable/registraradmin_ico"/>
+                <item
+                    android:id="@+id/ListarAdmin"
+                    android:title="@string/ListarAdmin"
+                    android:icon="@drawable/listaradmin_ico"/>
+
+            </menu>
+
+        </item>
+
+        <item
+            android:id="@+id/OpcionesPedidos"
+            android:title="@string/pedidos">
+
+            <menu>
+                <item
+                    android:id="@+id/Cocina"
+                    android:title="@string/Cocina"
+                    android:icon="@drawable/kitchen_ico"/>
+                <item
+                    android:id="@+id/Pedido"
+                    android:title="@string/nuevoPedido"
+                    android:icon="@drawable/nuevopedido_ico"/>
+                <item
+                    android:id="@+id/HistoricoPedidos"
+                    android:title="@string/historicoPedidos"
+                    android:icon="@drawable/historico_ico"/>
+
+            </menu>
+        </item>
+
+        <item
+            android:id="@+id/OpcionesSesion"
+            android:title="@string/sesion">
+
+            <menu>
+                <item
+                    android:id="@+id/Salir"
+                    android:title="@string/Salir"
+                    android:icon="@drawable/cerrarsesion_ico"/>
+            </menu>
+        </item>
+
+
+
+
+    </group>
+
+
+
+</menu>

@@ -1,0 +1,70 @@
+<resources>
+    <string name="app_name">BocailoApp</string>
+    <string name="desarrollador">Desarrollado por: Sahida Azoum</string>
+
+    <!--MENU ADMIN-->
+    <string name="InicioAdmin">Inicio</string>
+    <string name="PerfilAdmin">Perfil Administrador</string>
+    <string name="RegistrarAdmin">Registrar Administrador</string>
+    <string name="ListarAdmin">Listar Administrador</string>
+    <string name="Cocina">Cocina</string>
+    <string name="Salir">Cerrar Sesión</string>
+    <string name="historicoPedidos">Historico de Pedidos</string>
+    <string name="pedidos">Pedidos</string>
+    <string name="opciones_administrador">Opciones Administrador</string>
+    <string name="sesion">Sesión</string>
+
+    <!--MENU CLIENTE-->
+    <string name="OpcionesTxt">Opciones</string>
+    <string name="InicioCliente">Inicio</string>
+
+    <string name="Acceder">Acceder</string>
+    <string name="perfilCliente">Mi perfil</string>
+    <string name="misDatos">Mis Datos</string>
+    <string name="misPedidos">Mis Pedidos</string>
+    <string name="nuestrasRrss">Nuestras Redes Sociales</string>
+    <string name="facebook">Facebook</string>
+    <string name="instagram">Instagram</string>
+    <string name="whatsapp">Whatsapp</string>
+    <string name="email">E-mail</string>
+    <string name="nuevoPedido">Nuevo Pedido</string>
+    <string name="dondeEncontrarnos">Donde Encontrarnos</string>
+    <string name="contactar">Contáctanos</string>
+    <string name="telefono">Teléfono</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
+    <!--LOGINACTIVITY-->
+    <string name="logo_bocailo">Logo Bocailo</string>
+    <string name="usuario">USUARIO</string>
+    <string name="introduce_tu_email">Introduce tu email</string>
+    <string name="contrase_a">CONTRASEÑA</string>
+    <string name="introduce_contrase_a">Introduce Contraseña</string>
+    <string name="ha_olvidado_la_contrase_a">¿Ha olvidado la contraseña?</string>
+    <string name="recordarme">Recordarme</string>
+    <string name="iniciar_sesi_n">Iniciar Sesión</string>
+    <string name="no_tienes_cuenta">¿No tienes cuenta?</string>
+    <string name="reg_strate">REGÍSTRATE</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--REGISTRO DE ADMINISTRADORES -->
+    <string name="RegistroTxt">Registro de Administradores</string>
+    <string name="Correo">Correo electrónico</string>
+    <string name="Password">Contraseña</string>
+    <string name="Nombre">Nombre</string>
+    <string name="Apellidos">Apellidos</string>
+    <string name="Dni">DNI</string>
+    <string name="FechaRegistro">Fecha de Registro</string>
+    <string name="Registrar">Registrar</string>
+    <string name="introducetelefono">Introduce un nº de teléfono</string>
+    <string name="numtelefono">NÚMERO DE TELÉFONO:</string>
+    <string name="repitapass">Repita contraseña</string>
+    <string name="repitapassmay">REPITA CONTRASEÑA:</string>
+    <string name="introducepas">Introduzca una contraseña</string>
+    <string name="e_mail">E-MAIL:</string>
+
+
+</resources>

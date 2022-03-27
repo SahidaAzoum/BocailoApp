@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:showIn="navigation_view">
+
+
+    <item
+        android:id="@+id/OpcionesTxt"
+        android:title="@string/OpcionesTxt">
+
+        <menu>
+            <item
+                android:id="@+id/InicioCliente"
+                android:title="@string/InicioCliente"
+                android:icon="@drawable/inicio_ico"/>
+            <item
+                android:id="@+id/CarritoPedido"
+                android:title="Mi carrito"
+                android:icon="@drawable/carrito_ico"/>
+
+        </menu>
+
+    </item>
+
+    <item
+        android:id="@+id/OpcionesClienteTxt"
+        android:title="@string/perfilCliente">
+
+        <menu>
+
+            <item
+                android:id="@+id/MisDatos"
+                android:title="@string/misDatos"
+                android:icon="@drawable/misdatos_ico"/>
+
+            <item
+                android:id="@+id/MisPedidos"
+                android:title="@string/misPedidos"
+                android:icon="@drawable/mispedidos_ico"/>
+
+        </menu>
+
+
+    </item>
+
+
+    <item
+        android:id="@+id/RedesTxt"
+        android:title="@string/nuestrasRrss">
+
+        <menu>
+
+            <item
+                android:id="@+id/Facebook"
+                android:title="@string/facebook"
+                android:icon="@drawable/facebook_ico"/>
+            <item
+                android:id="@+id/Instagram"
+                android:title="@string/instagram"
+                android:icon="@drawable/instagram_ico"/>
+            <item
+                android:id="@+id/Whatsapp"
+                android:title="@string/whatsapp"
+                android:icon="@drawable/whatsapp_ico"/>
+            <item
+                android:id="@+id/Email"
+                android:title="@string/email"
+                android:icon="@drawable/email_ico"/>
+
+        </menu>
+
+
+    </item>
+
+    <item
+        android:id="@+id/Contactar"
+        android:title="@string/contactar">
+
+        <menu>
+
+            <item
+                android:id="@+id/DondeEncontrarnos"
+                android:title="@string/dondeEncontrarnos"
+                android:icon="@drawable/ubicacion_ico"/>
+
+            <item
+                android:id="@+id/Telefono"
+                android:title="@string/telefono"
+                android:icon="@drawable/telefono_ico"/>
+
+
+        </menu>
+
+    </item>
+
+
+</menu>

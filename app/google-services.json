@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "670809279949",
+    "firebase_url": "https://bocailoapp-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "bocailoapp",
+    "storage_bucket": "bocailoapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:670809279949:android:d80d9959c6c1dbd57b4884",
+        "android_client_info": {
+          "package_name": "com.example.bocailoapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "670809279949-2ki67ko58n5ce7d5rck3dh0eerp7qajn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bocailoapp",
+            "certificate_hash": "97719b360261daaee613dba1d031e861bd01a5d2"
+          }
+        },
+        {
+          "client_id": "670809279949-5kscmttl1phl3hg9nt9qb1b9elrlak4d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgW3XwlNyU9CgKxzxpr9Ee_BJ662AOTDc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "670809279949-5kscmttl1phl3hg9nt9qb1b9elrlak4d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

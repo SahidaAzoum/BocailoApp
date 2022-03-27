@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".Activities.LoginActivity"
+    tools:layout_editor_absoluteY="25dp">
+
+    <ImageView
+        android:id="@+id/ivBocailo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bocailocarga"
+        android:contentDescription="@string/logo_bocailo" />
+
+    <TextView
+        android:id="@+id/tvUsuario"
+        android:layout_width="116dp"
+        android:layout_height="25dp"
+        android:fontFamily="@font/segoeprint2"
+        android:text="@string/usuario"
+        android:textColor="@color/naranjaBocailo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.186"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivBocailo"
+        app:layout_constraintVertical_bias="0.249" />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bordesredondeados"
+        android:ems="10"
+        android:fontFamily="@font/segoeprint2"
+        android:hint="@string/introduce_tu_email"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivBocailo"
+        app:layout_constraintVertical_bias="0.297" />
+
+    <TextView
+        android:id="@+id/tvPass"
+        android:layout_width="161dp"
+        android:layout_height="25dp"
+        android:fontFamily="@font/segoeprint2"
+        android:text="@string/contrase_a"
+        android:textColor="@color/naranjaBocailo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.22"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.389" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:background="@drawable/bordesredondeados"
+        android:ems="10"
+        android:fontFamily="@font/segoeprint2"
+        android:hint="@string/introduce_contrase_a"
+        android:inputType="textPassword"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnRegistro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivBocailo"
+        app:layout_constraintVertical_bias="0.495" />
+
+    <TextView
+        android:id="@+id/txtOlvidoPass"
+        android:layout_width="209dp"
+        android:layout_height="25dp"
+        android:fontFamily="@font/segoeprint2"
+        android:text="@string/ha_olvidado_la_contrase_a"
+        android:textColor="@color/naranjaBocailo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.722"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivBocailo"
+        app:layout_constraintVertical_bias="0.552" />
+
+    <CheckBox
+        android:id="@+id/chkRemember"
+        android:layout_width="192dp"
+        android:layout_height="43dp"
+        android:fontFamily="@font/segoeprint2"
+        android:text="@string/recordarme"
+        android:textColor="@color/naranjaBocailo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.251"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivBocailo"
+        app:layout_constraintVertical_bias="0.623" />
+
+    <Button
+        android:id="@+id/btnIniciarSesion"
+        android:layout_width="225dp"
+        android:layout_height="50dp"
+        android:background="@drawable/bordesredondeados"
+        android:fontFamily="@font/segoeprint2"
+        android:text="@string/iniciar_sesi_n"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivBocailo"
+        app:layout_constraintVertical_bias="0.714" />
+
+    <View
+        android:id="@+id/vSeparador"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="498dp"
+        android:layout_marginBottom="159dp"
+        android:background="@color/naranjaBocailo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/tvSinUsuario"
+        android:layout_width="180dp"
+        android:layout_height="24dp"
+        android:fontFamily="@font/segoeprint2"
+        android:text="@string/no_tienes_cuenta"
+        android:textAlignment="center"
+        android:textColor="@color/naranjaBocailo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivBocailo"
+        app:layout_constraintVertical_bias="0.829" />
+
+    <Button
+        android:id="@+id/btnRegistro"
+        android:layout_width="225dp"
+        android:layout_height="50dp"
+        android:background="@drawable/bordesredondeados"
+        android:fontFamily="@font/segoeprint2"
+        android:text="@string/reg_strate"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivBocailo"
+        app:layout_constraintVertical_bias="0.934" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
