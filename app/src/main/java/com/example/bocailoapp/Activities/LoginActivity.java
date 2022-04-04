@@ -115,7 +115,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onSuccess(AuthResult authResult) {
                 Toast.makeText(LoginActivity.this, "Loggin correcto", Toast.LENGTH_SHORT).show();
-                comprobarNivelUsuario(Objects.requireNonNull(authResult.getUser()).getUid());
+                Boolean admin = comprobarNivelUsuario(Objects.requireNonNull(authResult.getUser()).getUid());
+                if(admin){
+                    Intent intent = new Intent(LoginActivity.this, MainActivityAdministrador.class);
+                    startActivity(intent);
+                }else{
+                    Intent intentCliente = new Intent(LoginActivity.this, MainActivityCliente.class);
+                    startActivity(intentCliente);
+                }
 
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -127,33 +134,30 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void comprobarNivelUsuario(String uid) {
+    private Boolean comprobarNivelUsuario(String uid) {
 
-       databaseReference.addValueEventListener(new ValueEventListener() {
-           @Override
-           public void onDataChange(@NonNull DataSnapshot snapshot) {
-               
-           }
+        Boolean isAdmin = null;
 
-           @Override
-           public void onCancelled(@NonNull DatabaseError error) {
-
-           }
-       })
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.child("USUARIOS").child(uid).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onSuccess(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.child("ISADMIN").toString().equals("1")){
-                    //es admin
-
-                    startActivity(new Intent(getApplicationContext(), MainActivityAdministrador.class));
-                    finish();
-                }else if(dataSnapshot.child("ISADMIN").toString().equals("0")){
-                    //es cliente
-                    startActivity(new Intent(getApplicationContext(), MainActivityCliente.class));
-                    finish();
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    String valor = Objects.requireNonNull(snapshot.child("ISADMIN").getValue()).toString();
+                    if(valor.equals("0")){
+                        Boolean isAdmin = false;
+                    }else if(valor.equals("1")){
+                        Boolean isAdmin = true;
+                    }
                 }
             }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
         });
+
+        return isAdmin;
     }
 
 
