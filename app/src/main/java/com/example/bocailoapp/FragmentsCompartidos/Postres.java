@@ -1,4 +1,4 @@
-package com.example.bocailoapp.FragmentsCliente;
+package com.example.bocailoapp.FragmentsCompartidos;
 
 import android.os.Bundle;
 
@@ -11,19 +11,16 @@ import android.view.ViewGroup;
 import com.example.bocailoapp.R;
 
 
-public class InicioCliente extends Fragment {
+public class Postres extends Fragment {
 
-
-    public InicioCliente() {
+    public Postres() {
+        // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.fragment_inicio_cliente, container, false);
-
+        View view = inflater.inflate(R.layout.fragment_postres, container, false);
         return view;
     }
 }

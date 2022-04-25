@@ -133,7 +133,7 @@ public class RegistroAdmin extends Fragment {
                             Administradores.put("NOMBRE", nombre);
                             Administradores.put("APELLIDOS", apellidos);
                             Administradores.put("DNI", dni);
-                            Administradores.put("ISADMIN", "1");
+                            Administradores.put("ISADMIN", "SI");
 
                             //Inicializar Firebase Database
                             FirebaseDatabase database = FirebaseDatabase.getInstance();

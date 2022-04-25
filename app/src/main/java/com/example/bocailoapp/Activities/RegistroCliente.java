@@ -115,7 +115,7 @@ public class RegistroCliente extends AppCompatActivity {
                             Clientes.put("CORREO", correo);
                             Clientes.put("PASSWORD", pass);
                             Clientes.put("TELEFONO", telefono);
-                            Clientes.put("ISADMIN", "0");
+                            Clientes.put("ISADMIN", "NO");
 
                             //Inicializar Firebase Database
                             FirebaseDatabase database = FirebaseDatabase.getInstance();

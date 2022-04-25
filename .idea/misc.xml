@@ -18,21 +18,31 @@
         <entry key="..\:/BocailoApp/app/src/main/res/menu/menu_cliente.xml" value="0.36666666666666664" />
         <entry key="..\:/ProyectoBocailo/BocailoApp/app/src/main/res/drawable-anydpi/misDatos_ico.xml" value="0.3769230769230769" />
         <entry key="..\:/ProyectoBocailo/BocailoApp/app/src/main/res/drawable-anydpi/nuevoPedido_ico.xml" value="0.22135416666666666" />
+        <entry key="..\:/ProyectoBocailo/BocailoApp/app/src/main/res/drawable/bordesredondeados.xml" value="0.323" />
         <entry key="..\:/ProyectoBocailo/BocailoApp/app/src/main/res/layout/activity_login.xml" value="0.3292572463768116" />
         <entry key="..\:/ProyectoBocailo/BocailoApp/app/src/main/res/layout/activity_main_admin.xml" value="0.1" />
-        <entry key="..\:/ProyectoBocailo/BocailoApp/app/src/main/res/layout/activity_main_cliente.xml" value="0.1" />
+        <entry key="..\:/ProyectoBocailo/BocailoApp/app/src/main/res/layout/activity_main_cliente.xml" value="0.25" />
         <entry key="..\:/ProyectoBocailo/BocailoApp/app/src/main/res/layout/activity_registro_cliente.xml" value="0.25" />
+        <entry key="..\:/ProyectoBocailo/BocailoApp/app/src/main/res/layout/fragment_costillar.xml" value="0.36666666666666664" />
+        <entry key="..\:/ProyectoBocailo/BocailoApp/app/src/main/res/layout/fragment_ensaladas.xml" value="0.36666666666666664" />
+        <entry key="..\:/ProyectoBocailo/BocailoApp/app/src/main/res/layout/fragment_entrantes.xml" value="0.36666666666666664" />
+        <entry key="..\:/ProyectoBocailo/BocailoApp/app/src/main/res/layout/fragment_hamburguesas.xml" value="0.36666666666666664" />
         <entry key="..\:/ProyectoBocailo/BocailoApp/app/src/main/res/layout/fragment_inicio_admin.xml" value="0.3292572463768116" />
         <entry key="..\:/ProyectoBocailo/BocailoApp/app/src/main/res/layout/fragment_inicio_cliente.xml" value="0.17831813576494426" />
+        <entry key="..\:/ProyectoBocailo/BocailoApp/app/src/main/res/layout/fragment_postres.xml" value="0.36666666666666664" />
         <entry key="..\:/ProyectoBocailo/BocailoApp/app/src/main/res/layout/fragment_registro_admin.xml" value="0.1947463768115942" />
         <entry key="..\:/ProyectoBocailo/BocailoApp/app/src/main/res/layout/fragment_registro_cliente.xml" value="0.18802083333333333" />
+        <entry key="..\:/ProyectoBocailo/BocailoApp/app/src/main/res/layout/fragment_sandwiches.xml" value="0.36666666666666664" />
+        <entry key="..\:/ProyectoBocailo/BocailoApp/app/src/main/res/layout/fragment_tex_mex.xml" value="0.36666666666666664" />
+        <entry key="..\:/ProyectoBocailo/BocailoApp/app/src/main/res/layout/listview.xml" value="0.36666666666666664" />
+        <entry key="..\:/ProyectoBocailo/BocailoApp/app/src/main/res/layout/listview_item.xml" value="0.36666666666666664" />
         <entry key="..\:/ProyectoBocailo/BocailoApp/app/src/main/res/menu/menu_admin.xml" value="0.20520833333333333" />
         <entry key="..\:/ProyectoBocailo/BocailoApp/app/src/main/res/menu/menu_cliente.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/sahid/StudioProjects/BocailoApp/app/src/main/res/layout/activity_login.xml" value="0.4" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="18" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" project-jdk-name="18" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

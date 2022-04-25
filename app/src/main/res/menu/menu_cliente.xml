@@ -59,14 +59,6 @@
                 android:id="@+id/Instagram"
                 android:title="@string/instagram"
                 android:icon="@drawable/instagram_ico"/>
-            <item
-                android:id="@+id/Whatsapp"
-                android:title="@string/whatsapp"
-                android:icon="@drawable/whatsapp_ico"/>
-            <item
-                android:id="@+id/Email"
-                android:title="@string/email"
-                android:icon="@drawable/email_ico"/>
 
         </menu>
 
@@ -78,6 +70,14 @@
         android:title="@string/contactar">
 
         <menu>
+            <item
+                android:id="@+id/Whatsapp"
+                android:title="@string/whatsapp"
+                android:icon="@drawable/whatsapp_ico"/>
+            <item
+                android:id="@+id/Email"
+                android:title="@string/email"
+                android:icon="@drawable/email_ico"/>
 
             <item
                 android:id="@+id/DondeEncontrarnos"

@@ -1,6 +1,9 @@
 package com.example.bocailoapp.Activities;
 
+import static com.google.firebase.auth.FirebaseAuth.*;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -17,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.bocailoapp.FragmentsAdmin.RegistroAdmin;
 import com.example.bocailoapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -25,6 +29,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,6 +49,10 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
+    boolean isAdmin;
+    String admin1;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
         btnIniciarSesion =(Button) findViewById(R.id.btnIniciarSesion);
         btnRegistro =(Button) findViewById(R.id.btnRegistro);
 
-        firebaseAuth= FirebaseAuth.getInstance();
+        firebaseAuth= getInstance();
 
         progressDialog = new ProgressDialog(LoginActivity.this);
         progressDialog.setMessage("Accediendo, espere por favor");
@@ -115,14 +124,31 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onSuccess(AuthResult authResult) {
                 Toast.makeText(LoginActivity.this, "Loggin correcto", Toast.LENGTH_SHORT).show();
-                Boolean admin = comprobarNivelUsuario(Objects.requireNonNull(authResult.getUser()).getUid());
-                if(admin){
-                    Intent intent = new Intent(LoginActivity.this, MainActivityAdministrador.class);
-                    startActivity(intent);
-                }else{
-                    Intent intentCliente = new Intent(LoginActivity.this, MainActivityCliente.class);
-                    startActivity(intentCliente);
-                }
+
+                databaseReference= FirebaseDatabase.getInstance().getReference().child("USUARIOS").child(Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid()).child("ISADMIN");
+                databaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        admin1= String.valueOf(snapshot.getValue());
+
+                        if(admin1!= null){
+                            if(admin1.equalsIgnoreCase("SI")){
+                                Intent intent = new Intent(LoginActivity.this, MainActivityAdministrador.class);
+                                startActivity(intent);
+                            }else if(admin1.equalsIgnoreCase("NO")){
+                                Intent intentCliente = new Intent(LoginActivity.this, MainActivityCliente.class);
+                                startActivity(intentCliente);
+                            }
+                        }else{
+                            System.out.println("Es nulo");
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
 
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -132,33 +158,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
     }
-
-    private Boolean comprobarNivelUsuario(String uid) {
-
-        Boolean isAdmin = null;
-
-        databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("USUARIOS").child(uid).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    String valor = Objects.requireNonNull(snapshot.child("ISADMIN").getValue()).toString();
-                    if(valor.equals("0")){
-                        Boolean isAdmin = false;
-                    }else if(valor.equals("1")){
-                        Boolean isAdmin = true;
-                    }
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        return isAdmin;
-    }
-
 
 }
