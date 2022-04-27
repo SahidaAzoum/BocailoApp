@@ -61,8 +61,11 @@ public class Entrantes extends Fragment {
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName)
             {
 
-                Plato plato = new Plato();
-                plato.setNombre(Objects.requireNonNull(snapshot.getValue()).toString());
+                Plato plato = snapshot.getValue(Plato.class);
+                System.out.println(plato);
+                //plato.setNombre();
+                //plato.setDescripcion(snapshot.child("descripcion").toString());
+                //plato.setPrecio(snapshot.child("precio").toString());
                 platos.add(plato);
                 adaptador.notifyDataSetChanged();
             }

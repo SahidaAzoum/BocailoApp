@@ -59,7 +59,7 @@ public class Adaptador extends ArrayAdapter<Plato>
         ImageView ivPlato = view.findViewById(R.id.ivPlato);
 
         tvNombrePlato.setText(plato.getNombre());
-        tvPrecio.setText((int) miArray.get(i).getPrecio());
+        tvPrecio.setText((int)miArray.get(i).getPrecio());
         ivPlato.setImageURI(Uri.parse(miArray.get(i).getImagen()));
 
         return view;
