@@ -10,14 +10,18 @@ import androidx.appcompat.widget.Toolbar;
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bocailoapp.FragmentsAdmin.RegistroAdmin;
@@ -42,6 +46,8 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText etEmail, etPassword;
     Button btnIniciarSesion,btnRegistro;
+    TextView txtOlvidoPass;
+    CheckBox chkRemember;
 
     FirebaseAuth firebaseAuth;
     ProgressDialog progressDialog;
@@ -51,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
 
     boolean isAdmin;
     String admin1;
+
 
 
     @Override
@@ -63,11 +70,12 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-
+        txtOlvidoPass = findViewById(R.id.txtOlvidoPass);
         etEmail= (EditText) findViewById(R.id.etEmail);
         etPassword=(EditText) findViewById(R.id.etPassword);
         btnIniciarSesion =(Button) findViewById(R.id.btnIniciarSesion);
         btnRegistro =(Button) findViewById(R.id.btnRegistro);
+        chkRemember= findViewById(R.id.chkRemember);
 
         firebaseAuth= getInstance();
 
@@ -77,6 +85,15 @@ public class LoginActivity extends AppCompatActivity {
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("USUARIOS");
+
+        final SharedPreferences prefs = getSharedPreferences("recordarme", Context.MODE_PRIVATE);
+        String emailPrefs = prefs.getString("email", "");
+        String passPrefs = prefs.getString("password", "");
+        boolean estadoCheck = prefs.getBoolean("estadoCheck", false);
+
+        chkRemember.setChecked(estadoCheck);
+        etEmail.setText(emailPrefs);
+        etPassword.setText(passPrefs);
 
         btnIniciarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,7 +114,22 @@ public class LoginActivity extends AppCompatActivity {
                     etPassword.setFocusable(true);
                 }else{
                     Login(correo, pass);
+                    if(chkRemember.isChecked()){
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putString("email", correo);
+                        editor.putString("password", pass);
+                        editor.putBoolean("estadoCheck", chkRemember.isChecked());
+                        editor.apply();
+                    }else{
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putString("email", "");
+                        editor.putString("password", "");
+                        editor.putBoolean("estadoCheck", chkRemember.isChecked());
+                        editor.apply();
+                    }
+
                 }
+
 
 
             }
@@ -109,6 +141,16 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent= new Intent(LoginActivity.this, RegistroCliente.class);
                 startActivity(intent);
 
+            }
+        });
+
+        txtOlvidoPass.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intentReset = new Intent(LoginActivity.this, ResetPassword.class);
+                startActivity(intentReset);
             }
         });
 
@@ -135,9 +177,11 @@ public class LoginActivity extends AppCompatActivity {
                             if(admin1.equalsIgnoreCase("SI")){
                                 Intent intent = new Intent(LoginActivity.this, MainActivityAdministrador.class);
                                 startActivity(intent);
+                                finish();
                             }else if(admin1.equalsIgnoreCase("NO")){
                                 Intent intentCliente = new Intent(LoginActivity.this, MainActivityCliente.class);
                                 startActivity(intentCliente);
+                                finish();
                             }
                         }else{
                             System.out.println("Es nulo");

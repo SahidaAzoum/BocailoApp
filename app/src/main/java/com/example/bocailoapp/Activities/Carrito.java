@@ -5,74 +5,68 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.Lifecycle;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.DataSetObserver;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bocailoapp.Clases.Plato;
-import com.example.bocailoapp.FragmentsAdmin.InicioAdmin;
-import com.example.bocailoapp.FragmentsCliente.InicioCliente;
-import com.example.bocailoapp.FragmentsCompartidos.Costillar;
-import com.example.bocailoapp.FragmentsCompartidos.Ensaladas;
-import com.example.bocailoapp.FragmentsCompartidos.Entrantes;
-import com.example.bocailoapp.FragmentsCompartidos.Hamburguesas;
-import com.example.bocailoapp.FragmentsCompartidos.Perritos;
-import com.example.bocailoapp.FragmentsCompartidos.Postres;
-import com.example.bocailoapp.FragmentsCompartidos.Sandwiches;
-import com.example.bocailoapp.FragmentsCompartidos.TexMex;
 import com.example.bocailoapp.R;
+import com.example.bocailoapp.Utils.AdaptadorCarrito;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class MainActivityCliente extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class Carrito extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener
+{
 
-    DrawerLayout drawerLayout;
     FirebaseAuth firebaseAuth;
-    FirebaseUser user;
 
-    private TabLayout tabLayout;
-    private ViewPager2 viewPager2;
+    Button btnEnviarPedido, btnVolverCarrito;
+    ListView lvCarrito;
 
-    ArrayList<Plato> platos = new ArrayList<>();
     ArrayList<Plato> platosPedido;
 
+    AdaptadorCarrito adaptador;
+    DrawerLayout drawerLayout;
+
+    static TextView tvTotal;
+    static double total = 0;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_cliente);
+        setContentView(R.layout.activity_carrito);
 
-        SharedPreferences pedido =this.getSharedPreferences("pedido", Context.MODE_PRIVATE);
+        drawerLayout= findViewById(R.id.drawerCarrito);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        drawerLayout= findViewById(R.id.drawer_layout);
-        tabLayout = findViewById(R.id.tabLayout);
-        viewPager2 = findViewById(R.id.pagercliente);
-
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_viewcarrito);
 
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
@@ -82,58 +76,85 @@ public class MainActivityCliente extends AppCompatActivity implements Navigation
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
+
+        btnEnviarPedido = findViewById(R.id.btnEnviarPedido);
+        btnVolverCarrito = findViewById(R.id.btnvolvercarrito);
+        tvTotal = findViewById(R.id.tvTotalCarrito);
+
+        lvCarrito = findViewById(R.id.lvcarrito);
+
         loadData();
 
-        if(platosPedido.isEmpty() || platosPedido.size()<=0){
-            platosPedido = new ArrayList<>();
-            saveData();
-        }
+        adaptador= new AdaptadorCarrito(getApplicationContext(), platosPedido);
 
-        firebaseAuth =FirebaseAuth.getInstance();
-        user = firebaseAuth.getCurrentUser();
+        btnEnviarPedido.setOnClickListener(this);
+        btnVolverCarrito.setOnClickListener(this);
 
-        viewPager2.setAdapter(new AdaptadorFragment(getSupportFragmentManager(), getLifecycle()));
+        lvCarrito.setAdapter(adaptador);
 
-        //Para pasar de una pestaña a otra deslizando
-        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                tabLayout.selectTab(tabLayout.getTabAt(position));
-            }
-        });
+        calcularPrecio(platosPedido);
 
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-
-                viewPager2.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
 
 
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+    @Override
+    public void onClick(View view)
+    {
+
+        switch(view.getId())
+            {
+                case R.id.btnEnviarPedido:
+
+                    break;
+                case R.id.btnvolvercarrito:
+                    saveData();
+                    Intent intentVolver = new Intent(Carrito.this, MainActivityCliente.class);
+                    startActivity(intentVolver);
+                    break;
+            }
+
+    }
+
+    public void loadData()
+    {
+
+        SharedPreferences sharedPreferences = getSharedPreferences("pedido", MODE_PRIVATE);
+
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+        String json = sharedPreferences.getString("array", null);
+
+        Type type = new TypeToken<ArrayList<Plato>>()
+        {
+        }.getType();
+
+        platosPedido = gson.fromJson(json, type);
+
+    }
+
+    public static void calcularPrecio(ArrayList<Plato> array)
+    {
+        total = 0;
+
+        for (int i=0; i<array.size(); i++ )
+            {
+                total += array.get(i).getPrecio();
+            }
+
+        tvTotal.setText(total + "€");
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item)
+    {
         switch(item.getItemId()){
             case R.id.InicioCliente:
-                Intent intentInicio = new Intent(MainActivityCliente.this, MainActivityCliente.class);
+                Intent intentInicio = new Intent(Carrito.this, MainActivityCliente.class);
                 startActivity(intentInicio);
                 break;
             case R.id.CarritoPedido:
-                Intent intentCarrito = new Intent(MainActivityCliente.this, Carrito.class);
+                Intent intentCarrito = new Intent(Carrito.this, Carrito.class);
                 startActivity(intentCarrito);
                 break;
             case R.id.Facebook:
@@ -158,6 +179,7 @@ public class MainActivityCliente extends AppCompatActivity implements Navigation
                 intentwhatsapp.setAction(Intent.ACTION_VIEW);
                 String uri= "whatsapp://send?phone=608055815";
                 intentwhatsapp.setData(Uri.parse(uri));
+                //intentwhatsapp.setPackage("com.whatsapp");
                 startActivity(intentwhatsapp);
                 break;
             case R.id.DondeEncontrarnos:
@@ -177,52 +199,15 @@ public class MainActivityCliente extends AppCompatActivity implements Navigation
                 intentCall.setData(Uri.parse("tel:" + 916222002));
                 startActivity(intentCall);
                 break;
-            case R.id.CerrarSesion:
+            case R.id.Salir:
                 firebaseAuth.signOut();
                 Toast.makeText(this, "Cerraste sesión correctamente", Toast.LENGTH_SHORT).show();
-                Intent intentSalir = new Intent(MainActivityCliente.this, LoginActivity.class);
+                Intent intentSalir = new Intent(Carrito.this, LoginActivity.class);
                 startActivity(intentSalir);
                 break;
         }
 
         return false;
-    }
-
-    class AdaptadorFragment extends FragmentStateAdapter {
-
-        public AdaptadorFragment(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
-            super(fragmentManager, lifecycle);
-        }
-
-        @NonNull
-        @Override
-        public Fragment createFragment(int position) {
-            switch (position){
-                case 0:
-                    return new Entrantes();
-                case 1:
-                    return new Hamburguesas();
-                case 2:
-                    return new Sandwiches();
-                case 3:
-                    return new Perritos();
-                case 4:
-                    return new Costillar();
-                case 5:
-                    return new Ensaladas();
-                case 6:
-                    return new TexMex();
-                default:
-                    return new Postres();
-
-            }
-        }
-
-
-        @Override
-        public int getItemCount() {
-            return 8;
-        }
     }
 
     public void saveData()
@@ -236,20 +221,16 @@ public class MainActivityCliente extends AppCompatActivity implements Navigation
         editor.apply();
     }
 
-    public void loadData()
+    public static void saveData(ArrayList<Plato> array, Context contexto)
     {
-
-        SharedPreferences sharedPreferences = getSharedPreferences("pedido", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = contexto.getSharedPreferences("pedido", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
 
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-        String json = sharedPreferences.getString("array", null);
-
-
-        Type type = new TypeToken<ArrayList<Plato>>()
-        {
-        }.getType();
-
-        platosPedido = gson.fromJson(json, type);
-
+        String json = gson.toJson(array);
+        editor.putString("array", json);
+        editor.apply();
     }
+
+
 }

@@ -94,5 +94,19 @@
 
     </item>
 
+    <item
+        android:id="@+id/Salir"
+        android:title="@string/cerrar_ses">
+
+        <menu>
+            <item
+                android:id="@+id/CerrarSesion"
+                android:title="@string/cerrar_ses"
+                android:icon="@drawable/logout"/>
+
+        </menu>
+
+    </item>
+
 
 </menu>

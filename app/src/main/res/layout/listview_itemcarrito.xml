@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
+    android:background="@color/black"
+    android:focusable="false"
+    android:clickable="false"
+    android:orientation="horizontal">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:focusable="false"
+        android:clickable="false"
+        android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvNombrePlatoCarrito"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:clickable="false"
+                    android:fontFamily="@font/segoeprint2"
+                    android:text="Large Text"
+                    android:textIsSelectable="false"
+                    android:textSize="15dp"
+                    android:textColor="@color/naranjaBocailo" />
+
+                <TextView
+                    android:id="@+id/tvObservacionesCarrito"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:clickable="false"
+                    android:scrollbars="vertical"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/white"
+                    android:text="Observaciones"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tvPvpCarrito"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:fontFamily="@font/segoeprint2"
+                        android:text="Small text"
+                        android:textAlignment="center"
+                        android:textColor="@color/naranjaBocailo"
+                        android:textIsSelectable="false"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="20dp"
+                        tools:ignore="RtlCompat" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/ivModificar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/modificarblanco"
+                        android:layout_gravity="right"
+                        android:layout_marginLeft="10dp"
+                        android:onClick="onClick"
+                        />
+
+                    <ImageView
+                        android:id="@+id/ivPapelera"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/papelerablanca"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_gravity="right"
+                        android:onClick="onClick"
+                        />
+
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+
+</LinearLayout>

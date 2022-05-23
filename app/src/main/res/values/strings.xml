@@ -65,6 +65,7 @@
     <string name="repitapassmay">REPITA CONTRASEÑA:</string>
     <string name="introducepas">Introduzca una contraseña</string>
     <string name="e_mail">E-MAIL:</string>
+    <string name="cerrar_ses">Cerrar Sesión</string>
 
 
 </resources>

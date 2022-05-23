@@ -88,6 +88,7 @@
         android:fontFamily="@font/segoeprint2"
         android:text="@string/ha_olvidado_la_contrase_a"
         android:textColor="@color/naranjaBocailo"
+        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.722"

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawerCarrito"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" >
+
+<androidx.constraintlayout.widget.ConstraintLayout
+
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".Activities.Carrito">
+
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar"/>
+
+    <View
+        android:id="@+id/vSeparador2"
+        android:layout_width="100dp"
+        android:layout_height="2dp"
+        android:background="@color/naranjaBocailo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.951"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lvcarrito"
+        app:layout_constraintVertical_bias="0.065" />
+
+    <ImageView
+        android:id="@+id/ivBocailo"
+        android:layout_width="410dp"
+        android:layout_height="125dp"
+        android:src="@drawable/bocailocarga"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.004" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/segoeprint2"
+        android:gravity="center"
+        android:text="RESUMEN DE MI PEDIDO"
+        android:textAlignment="center"
+        android:textColor="@color/naranjaBocailo"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivBocailo"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <View
+        android:id="@+id/vSeparador"
+        android:layout_width="300dp"
+        android:layout_height="2dp"
+        android:background="@color/naranjaBocailo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+    <ListView
+        android:id="@+id/lvcarrito"
+        android:layout_width="match_parent"
+        android:layout_height="332dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:baselineAligned="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.011">
+
+    </ListView>
+
+    <Button
+        android:id="@+id/btnEnviarPedido"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/segoeprint2"
+        android:text="ENVIAR PEDIDO"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lvcarrito"
+        app:layout_constraintVertical_bias="0.511" />
+
+    <Button
+        android:id="@+id/btnvolvercarrito"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/segoeprint2"
+        android:text="VOLVER"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnEnviarPedido"
+        app:layout_constraintVertical_bias="0.448" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="90dp"
+        android:layout_height="40dp"
+        android:fontFamily="@font/segoeprint2"
+        android:text="Total: "
+        android:textColor="@color/naranjaBocailo"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tvTotalCarrito"
+        app:layout_constraintHorizontal_bias="0.932"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lvcarrito"
+        app:layout_constraintVertical_bias="0.17" />
+
+    <TextView
+        android:id="@+id/tvTotalCarrito"
+        android:layout_width="90dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/segoeprint2"
+        android:textAlignment="center"
+        android:textColor="@color/naranjaBocailo"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vSeparador2"
+        app:layout_constraintVertical_bias="0.088" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_viewcarrito"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        app:headerLayout="@layout/encabezado"
+        app:menu="@menu/menu_cliente"/>
+
+</androidx.drawerlayout.widget.DrawerLayout>

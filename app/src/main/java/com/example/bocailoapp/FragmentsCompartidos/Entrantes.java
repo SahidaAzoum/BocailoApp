@@ -1,17 +1,22 @@
 package com.example.bocailoapp.FragmentsCompartidos;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentFactory;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.bocailoapp.Activities.DetallesActivity;
 import com.example.bocailoapp.Clases.Plato;
 import com.example.bocailoapp.R;
 import com.example.bocailoapp.Utils.Adaptador;
@@ -23,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Objects;
 
 public class Entrantes extends Fragment {
@@ -30,9 +36,9 @@ public class Entrantes extends Fragment {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
-    ArrayAdapter<Plato> adaptador;
+    Adaptador adaptador;
 
-    private ListView list;
+    ListView list;
     ArrayList<Plato> platos = new ArrayList<>();
 
     public Entrantes() {
@@ -52,7 +58,7 @@ public class Entrantes extends Fragment {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference= firebaseDatabase.getReference("plato");
 
-        adaptador= new ArrayAdapter<Plato>(getActivity(), android.R.layout.simple_list_item_1, platos);
+        adaptador= new Adaptador(getActivity(), platos);
         list.setAdapter(adaptador);
 
         databaseReference.addChildEventListener(new ChildEventListener()
@@ -60,14 +66,16 @@ public class Entrantes extends Fragment {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName)
             {
+                if(snapshot.getValue(Plato.class).getTipo().equals("entrante")){
+                    Plato plato = snapshot.getValue(Plato.class);
+                    System.out.println(plato);
+                    //plato.setNombre();
+                    //plato.setDescripcion(snapshot.child("descripcion").toString());
+                    //plato.setPrecio(snapshot.child("precio").toString());
+                    platos.add(plato);
+                    adaptador.notifyDataSetChanged();
+                }
 
-                Plato plato = snapshot.getValue(Plato.class);
-                System.out.println(plato);
-                //plato.setNombre();
-                //plato.setDescripcion(snapshot.child("descripcion").toString());
-                //plato.setPrecio(snapshot.child("precio").toString());
-                platos.add(plato);
-                adaptador.notifyDataSetChanged();
             }
 
             @Override
@@ -98,7 +106,35 @@ public class Entrantes extends Fragment {
 
 
 
-
         return view;
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
+    {
+        super.onViewCreated(view, savedInstanceState);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+            {
+
+
+                Intent intentDetalle = new Intent(getActivity(), DetallesActivity.class);
+                intentDetalle.putExtra("nombre", platos.get(i).getNombre().toString());
+                intentDetalle.putExtra("descripcion", platos.get(i).getDescripcion().toString());
+                intentDetalle.putExtra("imagen", platos.get(i).getImagen().toString());
+                intentDetalle.putExtra("precio", platos.get(i).getPrecio());
+                intentDetalle.putExtra("id", platos.get(i).getId());
+                intentDetalle.putExtra("tipo", platos.get(i).getTipo());
+
+                startActivity(intentDetalle);
+
+
+            }
+        });
+    }
+
+
 }

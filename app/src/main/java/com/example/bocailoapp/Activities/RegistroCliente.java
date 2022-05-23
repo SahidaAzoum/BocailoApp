@@ -28,7 +28,7 @@ public class RegistroCliente extends AppCompatActivity {
 
     EditText etEmail, etPassword, etRepitaPass, editTextPhone;
 
-    Button btnRegistrarCliente;
+    Button btnRegistrarCliente, btnvolverRegistro;
 
     //autenticación con firebase
     FirebaseAuth auth;
@@ -48,11 +48,12 @@ public class RegistroCliente extends AppCompatActivity {
 
 
         //Inicializamos las variables
-        etEmail = (EditText) findViewById(R.id.etEmail);
-        etPassword = (EditText) findViewById(R.id.etPassword);
-        etRepitaPass = (EditText) findViewById(R.id.etRepitaPass);
-        editTextPhone = (EditText) findViewById(R.id.editTextPhone);
-        btnRegistrarCliente =(Button) findViewById(R.id.btnRegistrarCliente);
+        etEmail = findViewById(R.id.etEmail);
+        etPassword = findViewById(R.id.etPassword);
+        etRepitaPass = findViewById(R.id.etRepitaPass);
+        editTextPhone = findViewById(R.id.editTextPhone);
+        btnRegistrarCliente = findViewById(R.id.btnRegistrarCliente);
+        btnvolverRegistro = findViewById(R.id.btnvolverRegistro);
 
         btnRegistrarCliente.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +78,16 @@ public class RegistroCliente extends AppCompatActivity {
                         RegistroCliente(correo, password);
                     }
                 }
+            }
+        });
+
+        btnvolverRegistro.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intentVolver = new Intent(RegistroCliente.this, LoginActivity.class);
+                startActivity(intentVolver);
             }
         });
 
