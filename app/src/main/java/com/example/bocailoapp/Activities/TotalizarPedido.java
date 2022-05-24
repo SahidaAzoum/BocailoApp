@@ -7,25 +7,22 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.DataSetObserver;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.bocailoapp.Clases.Plato;
 import com.example.bocailoapp.R;
-import com.example.bocailoapp.Utils.AdaptadorCarrito;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -34,39 +31,37 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Carrito extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener
-{
+public class TotalizarPedido extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    FirebaseAuth firebaseAuth;
-
-    Button btnEnviarPedido, btnVolverCarrito;
-    ListView lvCarrito;
+    EditText nombre, apellidos,email,telefono,calle,poblacion,cp,observaciones;
+    Button btnEnviar;
 
     ArrayList<Plato> platosPedido;
 
-    AdaptadorCarrito adaptador;
     DrawerLayout drawerLayout;
 
-    static TextView tvTotal;
-    static double total = 0;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+    StorageReference storageReference;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    FirebaseAuth firebaseAuth;
+    FirebaseUser user;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_carrito);
+        setContentView(R.layout.activity_totalizar_pedido);
 
-        drawerLayout= findViewById(R.id.drawerCarrito);
+        drawerLayout= findViewById(R.id.drawerDatosPedido);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        NavigationView navigationView = findViewById(R.id.nav_viewcarrito);
+        NavigationView navigationView = findViewById(R.id.nav_viewdatosPedido);
 
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
@@ -76,46 +71,32 @@ public class Carrito extends AppCompatActivity implements View.OnClickListener, 
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
+        firebaseAuth =FirebaseAuth.getInstance();
+        user = firebaseAuth.getCurrentUser();
 
-        btnEnviarPedido = findViewById(R.id.btnEnviarPedido);
-        btnVolverCarrito = findViewById(R.id.btnvolvercarrito);
-        tvTotal = findViewById(R.id.tvTotalCarrito);
+        nombre = findViewById(R.id.etNombrePedido);
+        apellidos = findViewById(R.id.etApellidosPedido);
+        email = findViewById(R.id.etEmailPedidos);
+        telefono = findViewById(R.id.etTelefonoPedidos);
+        calle = findViewById(R.id.etCallePedido);
+        poblacion = findViewById(R.id.etPoblacionPedido);
+        cp = findViewById(R.id.etCpPedido);
+        observaciones = findViewById(R.id.etObservacionesPedido);
+        btnEnviar = findViewById(R.id.btnEnviar);
 
-        lvCarrito = findViewById(R.id.lvcarrito);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference =  firebaseDatabase.getReference("USUARIOS").child(firebaseAuth.getCurrentUser().getUid()).child("TELEFONO");
+        email.setText(user.getEmail());
+        telefono.setText(databaseReference.toString());
 
-        loadData();
-
-        adaptador= new AdaptadorCarrito(getApplicationContext(), platosPedido);
-
-        btnEnviarPedido.setOnClickListener(this);
-        btnVolverCarrito.setOnClickListener(this);
-
-        lvCarrito.setAdapter(adaptador);
-
-        calcularPrecio(platosPedido);
-
-
-
-    }
+        btnEnviar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
 
-    @Override
-    public void onClick(View view)
-    {
-
-        switch(view.getId())
-            {
-                case R.id.btnEnviarPedido:
-                    saveData();
-                    Intent intentEnviar = new Intent(Carrito.this, TotalizarPedido.class);
-                    startActivity(intentEnviar);
-                    break;
-                case R.id.btnvolvercarrito:
-                    saveData();
-                    Intent intentVolver = new Intent(Carrito.this, MainActivityCliente.class);
-                    startActivity(intentVolver);
-                    break;
             }
+        });
+
 
     }
 
@@ -135,28 +116,27 @@ public class Carrito extends AppCompatActivity implements View.OnClickListener, 
 
     }
 
-    public static void calcularPrecio(ArrayList<Plato> array)
+    public void saveData()
     {
-        total = 0;
+        SharedPreferences sharedPreferences = getSharedPreferences("pedido", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        for (int i=0; i<array.size(); i++ )
-            {
-                total += array.get(i).getPrecio();
-            }
-
-        tvTotal.setText(total + "€");
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+        String json = gson.toJson(platosPedido);
+        editor.putString("array", json);
+        editor.apply();
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item)
-    {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
         switch(item.getItemId()){
             case R.id.InicioCliente:
-                Intent intentInicio = new Intent(Carrito.this, MainActivityCliente.class);
+                Intent intentInicio = new Intent(TotalizarPedido.this, MainActivityCliente.class);
                 startActivity(intentInicio);
                 break;
             case R.id.CarritoPedido:
-                Intent intentCarrito = new Intent(Carrito.this, Carrito.class);
+                Intent intentCarrito = new Intent(TotalizarPedido.this, Carrito.class);
                 startActivity(intentCarrito);
                 break;
             case R.id.Facebook:
@@ -204,35 +184,11 @@ public class Carrito extends AppCompatActivity implements View.OnClickListener, 
             case R.id.Salir:
                 firebaseAuth.signOut();
                 Toast.makeText(this, "Cerraste sesión correctamente", Toast.LENGTH_SHORT).show();
-                Intent intentSalir = new Intent(Carrito.this, LoginActivity.class);
+                Intent intentSalir = new Intent(TotalizarPedido.this, LoginActivity.class);
                 startActivity(intentSalir);
                 break;
         }
 
         return false;
     }
-
-    public void saveData()
-    {
-        SharedPreferences sharedPreferences = getSharedPreferences("pedido", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-        String json = gson.toJson(platosPedido);
-        editor.putString("array", json);
-        editor.apply();
-    }
-
-    public static void saveData(ArrayList<Plato> array, Context contexto)
-    {
-        SharedPreferences sharedPreferences = contexto.getSharedPreferences("pedido", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-        String json = gson.toJson(array);
-        editor.putString("array", json);
-        editor.apply();
-    }
-
-
 }

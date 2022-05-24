@@ -84,7 +84,7 @@ public class MainActivityCliente extends AppCompatActivity implements Navigation
 
         loadData();
 
-        if(platosPedido.isEmpty() || platosPedido.size()<=0){
+        if(platosPedido == null || platosPedido.isEmpty() || platosPedido.size()<=0 ){
             platosPedido = new ArrayList<>();
             saveData();
         }

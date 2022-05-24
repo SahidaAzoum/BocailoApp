@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawerDatosPedido"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        tools:context=".Activities.TotalizarPedido">
+
+
+
+        <include layout="@layout/toolbar"
+            android:id="@+id/toolbar"/>
+
+        <TextView
+            android:id="@+id/tvTituloPedido"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:fontFamily="@font/segoeprint2"
+            android:text="DATOS PERSONALES"
+            android:textAlignment="center"
+            android:textSize="25dp"
+            android:textColor="@color/naranjaBocailo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintVertical_bias="0.033"/>
+
+        <View
+            android:id="@+id/vSeparador2"
+            android:layout_width="300dp"
+            android:layout_height="2dp"
+            android:background="@color/naranjaBocailo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTituloPedido"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <EditText
+            android:id="@+id/etNombrePedido"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="432dp"
+            android:background="@drawable/bordesredondeados"
+            android:hint="Nombre"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTituloPedido"
+            app:layout_constraintVertical_bias="0.121" />
+
+        <EditText
+            android:id="@+id/etApellidosPedido"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="432dp"
+            android:background="@drawable/bordesredondeados"
+            android:hint="Apellidos"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etNombrePedido"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <EditText
+            android:id="@+id/etEmailPedidos"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bordesredondeados"
+            android:hint="Email"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etApellidosPedido"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <EditText
+            android:id="@+id/etTelefonoPedidos"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:background="@drawable/bordesredondeados"
+            android:hint="Teléfono"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etEmailPedidos"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <EditText
+            android:id="@+id/etCallePedido"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:background="@drawable/bordesredondeados"
+            android:hint="Calle, número, bloque, piso"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etTelefonoPedidos"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <EditText
+            android:id="@+id/etPoblacionPedido"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:background="@drawable/bordesredondeados"
+            android:hint="Población"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etCallePedido"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <EditText
+            android:id="@+id/etCpPedido"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:background="@drawable/bordesredondeados"
+            android:hint="Código Postal"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etPoblacionPedido"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <EditText
+            android:id="@+id/etObservacionesPedido"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:background="@drawable/bordesredondeados"
+            android:hint="Observaciones del envío"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etCpPedido"
+            app:layout_constraintVertical_bias="0.172" />
+
+        <Button
+            android:id="@+id/btnEnviar"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="ENVIAR PEDIDO"
+            android:textColor="@color/black"
+            android:fontFamily="@font/segoeprint2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etObservacionesPedido" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_viewdatosPedido"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        app:headerLayout="@layout/encabezado"
+        app:menu="@menu/menu_cliente"/>
+
+</androidx.drawerlayout.widget.DrawerLayout>

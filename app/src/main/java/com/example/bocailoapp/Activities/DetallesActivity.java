@@ -25,6 +25,7 @@ import com.example.bocailoapp.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -46,6 +47,8 @@ public class DetallesActivity extends AppCompatActivity implements View.OnClickL
     StorageReference storageReference;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     FirebaseAuth firebaseAuth;
+    FirebaseUser user;
+
 
 
     ArrayList<Plato> platos = new ArrayList<>();
@@ -98,6 +101,9 @@ public class DetallesActivity extends AppCompatActivity implements View.OnClickL
 
         btnVolverCarta.setOnClickListener(this);
         btnAnadirPedido.setOnClickListener(this);
+
+        firebaseAuth =FirebaseAuth.getInstance();
+        user = firebaseAuth.getCurrentUser();
 
         Bundle datos = this.getIntent().getExtras();
 
