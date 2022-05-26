@@ -9,10 +9,16 @@ public class Pedido implements Serializable
     int numPedido;
     LocalDate fecha;
     String usuario;
-    String direccion;
+    String nombre;
+    String apellidos;
+    String email;
+    String calle;
+    String poblacion;
+    String cp;
     String telefono;
     String estado;
     String observaciones;
+
     boolean enviado;
     ArrayList<Plato> pedido = new ArrayList<Plato>();
 
@@ -20,26 +26,34 @@ public class Pedido implements Serializable
     {
     }
 
-    public Pedido(int numPedido,LocalDate fecha, String usuario, String direccion, String telefono, String estado, boolean enviado, ArrayList<Plato> pedido)
+    public Pedido(int numPedido, LocalDate fecha, String usuario, String nombre, String apellidos, String email, String calle, String poblacion, String cp, String telefono, String estado, boolean enviado, ArrayList<Plato> pedido)
     {
-
         this.numPedido = numPedido;
         this.fecha = fecha;
         this.usuario = usuario;
-        this.direccion = direccion;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.email = email;
+        this.calle = calle;
+        this.poblacion = poblacion;
+        this.cp = cp;
         this.telefono = telefono;
         this.estado = estado;
         this.enviado = enviado;
         this.pedido = pedido;
     }
 
-    public Pedido(int numPedido, String usuario, String direccion, String telefono, String estado, String observaciones, boolean enviado, ArrayList<Plato> pedido)
+    public Pedido(int numPedido, LocalDate fecha, String usuario, String nombre, String apellidos, String email, String calle, String poblacion, String cp, String telefono, String estado, String observaciones, boolean enviado, ArrayList<Plato> pedido)
     {
-
         this.numPedido = numPedido;
         this.fecha = fecha;
         this.usuario = usuario;
-        this.direccion = direccion;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.email = email;
+        this.calle = calle;
+        this.poblacion = poblacion;
+        this.cp = cp;
         this.telefono = telefono;
         this.estado = estado;
         this.observaciones = observaciones;
@@ -75,16 +89,6 @@ public class Pedido implements Serializable
     public void setUsuario(String usuario)
     {
         this.usuario = usuario;
-    }
-
-    public String getDireccion()
-    {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion)
-    {
-        this.direccion = direccion;
     }
 
     public String getTelefono()
@@ -135,5 +139,65 @@ public class Pedido implements Serializable
     public void setPedido(ArrayList<Plato> pedido)
     {
         this.pedido = pedido;
+    }
+
+    public String getNombre()
+    {
+        return nombre;
+    }
+
+    public void setNombre(String nombre)
+    {
+        this.nombre = nombre;
+    }
+
+    public String getApellidos()
+    {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos)
+    {
+        this.apellidos = apellidos;
+    }
+
+    public String getEmail()
+    {
+        return email;
+    }
+
+    public void setEmail(String email)
+    {
+        this.email = email;
+    }
+
+    public String getCalle()
+    {
+        return calle;
+    }
+
+    public void setCalle(String calle)
+    {
+        this.calle = calle;
+    }
+
+    public String getPoblacion()
+    {
+        return poblacion;
+    }
+
+    public void setPoblacion(String poblacion)
+    {
+        this.poblacion = poblacion;
+    }
+
+    public String getCp()
+    {
+        return cp;
+    }
+
+    public void setCp(String cp)
+    {
+        this.cp = cp;
     }
 }

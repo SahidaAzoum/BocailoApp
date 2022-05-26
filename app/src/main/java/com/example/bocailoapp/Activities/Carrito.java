@@ -95,7 +95,6 @@ public class Carrito extends AppCompatActivity implements View.OnClickListener, 
         calcularPrecio(platosPedido);
 
 
-
     }
 
 
@@ -107,8 +106,16 @@ public class Carrito extends AppCompatActivity implements View.OnClickListener, 
             {
                 case R.id.btnEnviarPedido:
                     saveData();
-                    Intent intentEnviar = new Intent(Carrito.this, TotalizarPedido.class);
-                    startActivity(intentEnviar);
+                    if(platosPedido.isEmpty())
+                        {
+                            Toast.makeText(this, "Debe tener platos para poder realizar el pedido.", Toast.LENGTH_SHORT).show();
+                        }
+                    else
+                        {
+                            Intent intentEnviar = new Intent(Carrito.this, TotalizarPedido.class);
+                            startActivity(intentEnviar);
+                        }
+
                     break;
                 case R.id.btnvolvercarrito:
                     saveData();
@@ -158,6 +165,10 @@ public class Carrito extends AppCompatActivity implements View.OnClickListener, 
             case R.id.CarritoPedido:
                 Intent intentCarrito = new Intent(Carrito.this, Carrito.class);
                 startActivity(intentCarrito);
+                break;
+            case R.id.MisDatos:
+                Intent intentDatos = new Intent(Carrito.this, DatosPersonales.class);
+                startActivity(intentDatos);
                 break;
             case R.id.Facebook:
                 Uri uriUrl= Uri.parse("https://www.facebook.com/www.bocailo.es");

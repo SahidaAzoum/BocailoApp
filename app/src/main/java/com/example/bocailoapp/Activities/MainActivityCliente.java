@@ -136,6 +136,10 @@ public class MainActivityCliente extends AppCompatActivity implements Navigation
                 Intent intentCarrito = new Intent(MainActivityCliente.this, Carrito.class);
                 startActivity(intentCarrito);
                 break;
+            case R.id.MisDatos:
+                Intent intentDatos = new Intent(MainActivityCliente.this, DatosPersonales.class);
+                startActivity(intentDatos);
+                break;
             case R.id.Facebook:
                 Uri uriUrl= Uri.parse("https://www.facebook.com/www.bocailo.es");
                 Intent intentFacebook= new Intent(Intent.ACTION_VIEW, uriUrl);

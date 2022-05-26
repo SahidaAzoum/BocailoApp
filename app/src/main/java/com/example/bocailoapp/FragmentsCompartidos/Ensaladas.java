@@ -62,9 +62,6 @@ public class Ensaladas extends Fragment {
                 if(snapshot.getValue(Plato.class).getTipo().equals("ensaladas")){
                     Plato plato = snapshot.getValue(Plato.class);
                     System.out.println(plato);
-                    //plato.setNombre();
-                    //plato.setDescripcion(snapshot.child("descripcion").toString());
-                    //plato.setPrecio(snapshot.child("precio").toString());
                     platos.add(plato);
                     adaptador.notifyDataSetChanged();
                 }
