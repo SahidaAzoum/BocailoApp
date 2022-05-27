@@ -170,6 +170,10 @@ public class Carrito extends AppCompatActivity implements View.OnClickListener, 
                 Intent intentDatos = new Intent(Carrito.this, DatosPersonales.class);
                 startActivity(intentDatos);
                 break;
+            case R.id.MisPedidos:
+                Intent intentPedidos = new Intent(Carrito.this, HistoricoPedidosCliente.class);
+                startActivity(intentPedidos);
+                break;
             case R.id.Facebook:
                 Uri uriUrl= Uri.parse("https://www.facebook.com/www.bocailo.es");
                 Intent intentFacebook= new Intent(Intent.ACTION_VIEW, uriUrl);

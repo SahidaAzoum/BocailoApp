@@ -125,6 +125,10 @@ public class DatosPersonales extends AppCompatActivity implements NavigationView
                     Intent intentDatos = new Intent(DatosPersonales.this, DatosPersonales.class);
                     startActivity(intentDatos);
                     break;
+                case R.id.MisPedidos:
+                    Intent intentPedidos = new Intent(DatosPersonales.this, HistoricoPedidosCliente.class);
+                    startActivity(intentPedidos);
+                    break;
                 case R.id.Facebook:
                     Uri uriUrl = Uri.parse("https://www.facebook.com/www.bocailo.es");
                     Intent intentFacebook = new Intent(Intent.ACTION_VIEW, uriUrl);

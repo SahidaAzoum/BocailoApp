@@ -1,6 +1,7 @@
 package com.example.bocailoapp.Activities;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -17,16 +18,20 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.bocailoapp.Clases.Pedido;
 import com.example.bocailoapp.R;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class HistoricoPedidosCliente extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener
@@ -43,13 +48,15 @@ public class HistoricoPedidosCliente extends AppCompatActivity implements Naviga
 
     ListView listview;
 
+    ArrayList<Pedido> pedidos;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historico_pedidos_cliente);
 
-        drawerLayout= findViewById(R.id.drawerDatosPedido);
+        drawerLayout= findViewById(R.id.drawerMisPedidos);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -72,7 +79,7 @@ public class HistoricoPedidosCliente extends AppCompatActivity implements Naviga
 
         btnVolver.setOnClickListener(this);
 
-
+        CargarPedidos();
 
     }
 
@@ -92,6 +99,10 @@ public class HistoricoPedidosCliente extends AppCompatActivity implements Naviga
                 case R.id.MisDatos:
                     Intent intentDatos = new Intent(HistoricoPedidosCliente.this, DatosPersonales.class);
                     startActivity(intentDatos);
+                    break;
+                case R.id.MisPedidos:
+                    Intent intentPedidos = new Intent(HistoricoPedidosCliente.this, HistoricoPedidosCliente.class);
+                    startActivity(intentPedidos);
                     break;
                 case R.id.Facebook:
                     Uri uriUrl = Uri.parse("https://www.facebook.com/www.bocailo.es");
@@ -163,23 +174,45 @@ public class HistoricoPedidosCliente extends AppCompatActivity implements Naviga
 
     public void CargarPedidos(){
 
+        String user1 = firebaseAuth.getCurrentUser().getUid();
+
         firebaseDatabase = FirebaseDatabase.getInstance();
 
         databaseReference = firebaseDatabase.getReference("PEDIDOS");
 
-        databaseReference.addValueEventListener(new ValueEventListener()
-        {
+        Query pedidosUid = FirebaseDatabase.getInstance().getReference().child("PEDIDOS").orderByChild("UID").equalTo(user1);
+
+        pedidosUid.addChildEventListener(new ChildEventListener() {
+
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot)
-            {
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                pedidos = new ArrayList<>();
+                Pedido pedido = snapshot.getValue(Pedido.class);
+                System.out.println(pedido);
 
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error)
-            {
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
             }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
         });
+
     }
 }

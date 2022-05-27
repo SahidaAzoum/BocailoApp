@@ -210,6 +210,10 @@ public class DetallesActivity extends AppCompatActivity implements View.OnClickL
                 Intent intentDatos = new Intent(DetallesActivity.this, DatosPersonales.class);
                 startActivity(intentDatos);
                 break;
+            case R.id.MisPedidos:
+                Intent intentPedidos = new Intent(DetallesActivity.this, HistoricoPedidosCliente.class);
+                startActivity(intentPedidos);
+                break;
             case R.id.Facebook:
                 Uri uriUrl= Uri.parse("https://www.facebook.com/www.bocailo.es");
                 Intent intentFacebook= new Intent(Intent.ACTION_VIEW, uriUrl);
